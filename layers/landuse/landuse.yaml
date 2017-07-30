@@ -27,6 +27,9 @@ layer:
       - industrial
       - retail
       - stadium
+      - golf_course
+      - theme_park
+      - zoo
   datasource:
     geometry_field: geometry
     query: (SELECT geometry, class FROM layer_landuse(!bbox!, z(!scale_denominator!))) AS t
