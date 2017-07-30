@@ -30,7 +30,7 @@ BEGIN
           ne.nameascii ILIKE osm.name_en OR
           ne.name = unaccent(osm.name)
       )
-      AND osm.place IN ('city', 'town', 'village')
+      AND osm.place IN ('city', 'town', 'village', 'suburb')
       AND ST_DWithin(ne.geometry, osm.geometry, 50000)
   )
   UPDATE osm_city_point AS osm
