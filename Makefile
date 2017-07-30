@@ -1,4 +1,21 @@
+
 all: build/openmaptiles.tm2source/data.yml build/mapping.yaml build/tileset.sql
+
+update: clean all import generate
+
+
+init:
+	docker-compose run --rm import-water
+	docker-compose run --rm import-osmborder
+	docker-compose run --rm import-natural-earth
+	docker-compose run --rm import-lakelines
+
+import:
+	docker-compose run --rm import-osm
+	docker-compose run --rm import-sql
+
+generate:
+	docker-compose run --rm generate-vectortiles
 
 help:
 	@echo "=============================================================================="
