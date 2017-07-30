@@ -1,4 +1,25 @@
 
+CREATE OR REPLACE VIEW poi_point AS (
+    SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
+    FROM osm_poi_point
+);
+
+CREATE OR REPLACE VIEW poi_polygon_z12 AS (
+    SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
+    FROM osm_poi_polygon_gen2
+);
+
+CREATE OR REPLACE VIEW poi_polygon_z13 AS (
+    SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
+    FROM osm_poi_polygon_gen1
+);
+
+CREATE OR REPLACE VIEW poi_polygon_z14 AS (
+    SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
+    FROM osm_poi_polygon
+);
+
+
 -- etldoc: layer_poi[shape=record fillcolor=lightpink, style="rounded,filled",
 -- etldoc:     label="layer_poi | <z14_> z14+" ] ;
 
@@ -15,14 +36,24 @@ RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, name_de
         )::int AS "rank"
     FROM (
         -- etldoc: osm_poi_point ->  layer_poi:z14_
-        SELECT * FROM osm_poi_point
+        SELECT * FROM poi_point
             WHERE geometry && bbox
                 AND zoom_level >= 14
         UNION ALL
         -- etldoc: osm_poi_polygon ->  layer_poi:z14_
-        SELECT * FROM osm_poi_polygon
+        SELECT * FROM poi_polygon_z14
             WHERE geometry && bbox
                 AND zoom_level >= 14
+        UNION ALL
+
+        SELECT * FROM poi_polygon_z13
+            WHERE geometry && bbox
+                AND zoom_level = 13
+        UNION ALL
+
+        SELECT * FROM poi_polygon_z12
+            WHERE geometry && bbox
+                AND zoom_level = 12
         ) as poi_union
     ORDER BY "rank"
     ;

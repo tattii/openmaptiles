@@ -13,6 +13,24 @@ BEGIN
     END
   WHERE ST_GeometryType(geometry) <> 'ST_Point';
   ANALYZE osm_poi_polygon;
+
+  UPDATE osm_poi_polygon_gen1
+  SET geometry =
+           CASE WHEN ST_NPoints(ST_ConvexHull(geometry))=ST_NPoints(geometry)
+           THEN ST_Centroid(geometry)
+           ELSE ST_PointOnSurface(geometry)
+    END
+  WHERE ST_GeometryType(geometry) <> 'ST_Point';
+  ANALYZE osm_poi_polygon_gen1;
+
+  UPDATE osm_poi_polygon_gen2
+  SET geometry =
+           CASE WHEN ST_NPoints(ST_ConvexHull(geometry))=ST_NPoints(geometry)
+           THEN ST_Centroid(geometry)
+           ELSE ST_PointOnSurface(geometry)
+    END
+  WHERE ST_GeometryType(geometry) <> 'ST_Point';
+  ANALYZE osm_poi_polygon_gen2;
 END;
 $$ LANGUAGE plpgsql;
 

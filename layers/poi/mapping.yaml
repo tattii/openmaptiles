@@ -1,4 +1,14 @@
 
+generalized_tables:
+  poi_polygon_gen2:
+    source: poi_polygon_gen1
+    sql_filter: area>power(ZRES9,2)
+    tolerance: ZRES12
+  poi_polygon_gen1:
+    source: poi_polygon
+    sql_filter: area>power(ZRES10,2)
+    tolerance: ZRES13
+
 # imposm3 mapping file for https://github.com/osm2vectortiles/imposm3
 # Warning: this is not the official imposm3
 
@@ -154,6 +164,10 @@ tables:
     - name: station
       key: station
       type: string
+    - name: area
+      type: area
+    - name: webmerc_area
+      type: webmerc_area
     mapping:
       aerialway: *poi_mapping_aerialway
       amenity: *poi_mapping_amenity
