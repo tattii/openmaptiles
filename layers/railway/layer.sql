@@ -10,6 +10,11 @@ RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, tags hs
         SELECT * FROM osm_railway_station
             WHERE geometry && bbox
                 AND zoom_level >= 12
+
+        UNION ALL
+        SELECT * FROM osm_railway_station_polygon
+            WHERE geometry && bbox
+                AND zoom_level >= 12
         ) as station_union
     ;
 $$ LANGUAGE SQL IMMUTABLE;

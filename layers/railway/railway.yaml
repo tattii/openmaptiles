@@ -34,6 +34,7 @@ layer:
     srid: 900913
     query: (SELECT geometry, name, name_en, {name_languages}, class, subclass, network FROM layer_railway(!bbox!, z(!scale_denominator!), !pixel_width!)) AS t
 schema:
+  - ./update_polygon.sql
   - ./class.sql
   - ./layer.sql
 datasources:
