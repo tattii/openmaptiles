@@ -20,6 +20,10 @@ import-sql:
 generate:
 	docker-compose run --rm generate-vectortiles
 
+add-meta:
+	docker-compose run --rm openmaptiles-tools  generate-metadata ./data/tiles.mbtiles
+	docker-compose run --rm openmaptiles-tools  chmod 666         ./data/tiles.mbtiles
+
 help:
 	@echo "=============================================================================="
 	@echo " OpenMapTiles  https://github.com/openmaptiles/openmaptiles "
