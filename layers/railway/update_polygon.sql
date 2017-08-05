@@ -1,5 +1,5 @@
 DROP TRIGGER IF EXISTS trigger_flag ON osm_railway_station_polygon;
-DROP TRIGGER IF EXISTS trigger_refresh ON railway.updates;
+DROP TRIGGER IF EXISTS trigger_refresh ON railway_station.updates;
 
 -- etldoc:  osm_railway_station_polygon ->  osm_railway_station_polygon
 

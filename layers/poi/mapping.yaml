@@ -71,11 +71,6 @@ def_poi_mapping_leisure: &poi_mapping_leisure
   - swimming_pool
   - water_park
 
-# railway values , see http://taginfo.openstreetmap.org/keys/railway#values
-def_poi_mapping_railway: &poi_mapping_railway
-  - station
-  - halt
-  - tram_stop
 
 # shop values , see http://taginfo.openstreetmap.org/keys/shop#values
 def_poi_mapping_shop: &poi_mapping_shop
@@ -132,7 +127,6 @@ tables:
       historic: *poi_mapping_historic
       landuse: *poi_mapping_landuse
       leisure: *poi_mapping_leisure
-      railway: *poi_mapping_railway
       shop: *poi_mapping_shop
       tourism: *poi_mapping_tourism
       waterway: *poi_mapping_waterway
@@ -175,7 +169,6 @@ tables:
       historic: *poi_mapping_historic
       landuse: *poi_mapping_landuse
       leisure: *poi_mapping_leisure
-      railway: *poi_mapping_railway
       shop: *poi_mapping_shop
       tourism: *poi_mapping_tourism
       waterway: *poi_mapping_waterway
