@@ -15,6 +15,7 @@ tileset:
     - layers/place/place.yaml
     - layers/housenumber/housenumber.yaml
     - layers/poi/poi.yaml
+    - layers/railway/railway.yaml
   name: OpenMapTiles
   version: 3.3.0
   id: openmaptiles

@@ -1,0 +1,39 @@
+# imposm3 mapping file for https://github.com/osm2vectortiles/imposm3
+# Warning: this is not the official imposm3
+
+# railway values , see http://taginfo.openstreetmap.org/keys/railway#values
+def_poi_mapping_railway: &poi_mapping_railway
+  - station
+  - halt
+  - tram_stop
+
+
+tables:
+  # etldoc: imposm3 -> osm_poi_point
+  railway_station:
+    type: point
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: name
+      key: name
+      type: string
+    - name: name_en
+      key: name:en
+      type: string
+    - name: tags
+      type: hstore_tags
+    - name: subclass
+      type: mapping_value
+    - name: mapping_key
+      type: mapping_key
+    - name: station
+      key: station
+      type: string
+    - name: network
+      key: network
+      type: string
+    mapping:
+      railway: *poi_mapping_railway
