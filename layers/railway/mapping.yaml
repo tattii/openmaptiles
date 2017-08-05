@@ -65,3 +65,24 @@ tables:
       type: string
     mapping:
       railway: *poi_mapping_railway
+
+  station_building_polygon:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: validated_geometry
+    - name: building
+      key: building
+      type: string
+    mapping:
+      building:part:
+      - train_station
+      building:
+      - train_station
+    filters:
+      ireject:
+        building:part: ["no","none","No"]
+        building: ["no","none","No"]
+    type: polygon
+
