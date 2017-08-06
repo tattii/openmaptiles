@@ -7,8 +7,66 @@ def_poi_mapping_railway: &poi_mapping_railway
   - halt
   - tram_stop
 
+name_field: &name
+  name: name
+  key: name
+  type: string
+name_en_field: &name_en
+  name: name_en
+  key: name:en
+  type: string
+short_name_field: &short_name
+  key: short_name
+  name: short_name
+  type: string
+service_field: &service
+  key: service
+  name: service
+  type: string
+usage_field: &usage
+  key: usage
+  name: usage
+  type: string
+ref_field: &ref
+  key: ref
+  name: ref
+  type: string
+network_field: &network
+  key: network
+  name: network
+  type: string
 
 tables:
+  railway_linestring2:
+    type: linestring
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: railway
+      name: railway
+      type: string
+    - *ref
+    - *network
+    - *name
+    - *name_en
+    - *short_name
+    - *service
+    - *usage
+    - key: highspeed
+      name: highspeed
+      type: string
+    mapping:
+      railway:
+      - rail
+      - preserved
+      - funicular
+      - subway
+      - light_rail
+      - monorail
+      - tram
+
   # etldoc: imposm3 -> osm_poi_point
   railway_station:
     type: point

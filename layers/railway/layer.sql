@@ -21,6 +21,19 @@ RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, tags hs
 
     UNION ALL
 
+    -- railway linestring
+    SELECT osm_id, geometry, name,
+    name_en,
+    ''::hstore AS tags,
+    ''::text AS class,
+    ''::text AS subclass,
+    ''::text AS network
+    FROM osm_railway_network
+            WHERE geometry && bbox
+                AND zoom_level >= 13
+
+    UNION ALL
+
     -- station building
     SELECT osm_id, geometry, ''::text AS name,
     ''::text AS name_en,
