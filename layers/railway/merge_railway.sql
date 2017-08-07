@@ -17,17 +17,19 @@ CREATE MATERIALIZED VIEW osm_railway_network AS (
             || delete_empty_keys(hstore(ARRAY['name',name]))
             AS "tags",
         railway,
-        network
+        network,
+        highspeed
     FROM (
       SELECT
           ST_LineMerge(ST_Collect(geometry)) AS geometry,
           name,
           railway,
-          network
+          network,
+          highspeed
       FROM osm_railway_linestring2
       WHERE (name <> '') 
           AND ((railway = 'rail' AND usage = 'main') OR (railway != 'rail'))
-      group by name, railway, network
+      group by name, railway, network, highspeed
     ) AS railway_union
 );
 CREATE INDEX IF NOT EXISTS osm_railway_network_geometry_idx ON osm_railway_network USING gist(geometry);

@@ -25,9 +25,9 @@ RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, tags hs
     SELECT osm_id, geometry, name,
     name_en,
     ''::hstore AS tags,
-    ''::text AS class,
-    ''::text AS subclass,
-    ''::text AS network
+    railway_network_class(railway, name, highspeed) AS class,
+    railway AS subclass,
+    network
     FROM osm_railway_network
             WHERE geometry && bbox
                 AND zoom_level >= 13
