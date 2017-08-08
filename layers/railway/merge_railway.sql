@@ -2,6 +2,9 @@ DROP TRIGGER IF EXISTS trigger_flag ON osm_railway_linestring;
 DROP TRIGGER IF EXISTS trigger_refresh ON railway.updates;
 
 DROP MATERIALIZED VIEW IF EXISTS osm_railway_network CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen1 CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen2 CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen3 CASCADE;
 
 
 CREATE INDEX IF NOT EXISTS osm_railway_linestring_geometry_idx ON osm_railway_linestring2 USING gist(geometry);
@@ -34,6 +37,34 @@ CREATE MATERIALIZED VIEW osm_railway_network AS (
 );
 CREATE INDEX IF NOT EXISTS osm_railway_network_geometry_idx ON osm_railway_network USING gist(geometry);
 
+
+-- z12
+CREATE MATERIALIZED VIEW osm_railway_network_gen1 AS (
+    SELECT ST_Simplify(geometry, 10) AS geometry,
+        osm_id, name, name_en, tags, railway, network, highspeed
+    FROM osm_railway_network
+);
+CREATE INDEX IF NOT EXISTS osm_railway_network_gen1_geometry_idx ON osm_railway_network_gen1 USING gist(geometry);
+
+
+-- z10-11
+CREATE MATERIALIZED VIEW osm_railway_network_gen2 AS (
+    SELECT ST_Simplify(geometry, 40) AS geometry,
+        osm_id, name, name_en, tags, railway, network, highspeed
+    FROM osm_railway_network
+    WHERE railway = 'rail' AND ST_Length(geometry) > 4000
+);
+CREATE INDEX IF NOT EXISTS osm_railway_network_gen2_geometry_idx ON osm_railway_network_gen2 USING gist(geometry);
+
+
+-- z9
+CREATE MATERIALIZED VIEW osm_railway_network_gen3 AS (
+    SELECT ST_Simplify(geometry, 80) AS geometry,
+        osm_id, name, name_en, tags, railway, network, highspeed
+    FROM osm_railway_network
+    WHERE railway = 'rail' AND highspeed = 'yes' AND ST_Length(geometry) > 8000
+);
+CREATE INDEX IF NOT EXISTS osm_railway_network_gen3_geometry_idx ON osm_railway_network_gen3 USING gist(geometry);
 
 
 
