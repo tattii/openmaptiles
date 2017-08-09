@@ -32,6 +32,7 @@ CREATE MATERIALIZED VIEW osm_railway_network AS (
       FROM osm_railway_linestring2
       WHERE (name <> '') 
           AND ((railway = 'rail' AND usage = 'main') OR (railway != 'rail'))
+          AND service != 'yard' AND service != 'siding'
       group by name, railway, network, highspeed
     ) AS railway_union
 );
