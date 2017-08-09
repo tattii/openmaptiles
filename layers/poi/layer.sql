@@ -2,21 +2,25 @@
 CREATE OR REPLACE VIEW poi_point AS (
     SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
     FROM osm_poi_point
+    WHERE (subclass != 'school') OR (subclass = 'school' AND (name LIKE '%小学校' OR name LIKE '%中学校' OR name LIKE '%高等学校'))
 );
 
 CREATE OR REPLACE VIEW poi_polygon_z12 AS (
     SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
     FROM osm_poi_polygon_gen2
+    WHERE (subclass != 'school') OR (subclass = 'school' AND (name LIKE '%小学校' OR name LIKE '%中学校' OR name LIKE '%高等学校'))
 );
 
 CREATE OR REPLACE VIEW poi_polygon_z13 AS (
     SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
     FROM osm_poi_polygon_gen1
+    WHERE (subclass != 'school') OR (subclass = 'school' AND (name LIKE '%小学校' OR name LIKE '%中学校' OR name LIKE '%高等学校'))
 );
 
 CREATE OR REPLACE VIEW poi_polygon_z14 AS (
     SELECT osm_id, geometry, name, name_en, name_de, tags, subclass, mapping_key, station
     FROM osm_poi_polygon
+    WHERE (subclass != 'school') OR (subclass = 'school' AND (name LIKE '%小学校' OR name LIKE '%中学校' OR name LIKE '%高等学校'))
 );
 
 
