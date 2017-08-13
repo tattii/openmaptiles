@@ -6,6 +6,9 @@ DROP TRIGGER IF EXISTS trigger_refresh ON transportation_name.updates;
 -- to allow for nice label rendering
 -- Because this works well for roads that do not have relations as well
 
+-- remove (...)
+update osm_highway_linestring SET name = regexp_replace(name, '\(.*\)', '') WHERE name LIKE '%(%)';
+
 
 -- etldoc: osm_highway_linestring ->  osm_transportation_name_network
 -- etldoc: osm_route_member ->  osm_transportation_name_network
@@ -69,6 +72,7 @@ CREATE INDEX IF NOT EXISTS osm_transportation_name_linestring_geometry_idx ON os
 CREATE INDEX IF NOT EXISTS osm_transportation_name_linestring_highway_partial_idx
   ON osm_transportation_name_linestring(highway)
   WHERE highway IN ('motorway','trunk');
+
 
 -- etldoc: osm_transportation_name_linestring -> osm_transportation_name_linestring_gen1
 CREATE MATERIALIZED VIEW osm_transportation_name_linestring_gen1 AS (
