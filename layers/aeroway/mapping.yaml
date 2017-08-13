@@ -41,6 +41,40 @@ tables:
       - taxiway
       - apron
 
+  aeroway_airport:
+    type: point
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: aeroway
+      key: aeroway
+      type: string
+    - name: name
+      key: name
+      type: string
+    mapping:
+      aeroway:
+      - aerodrome
+  
+  aeroway_airport_polygon:
+    type: polygon
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: aeroway
+      key: aeroway
+      type: string
+    - name: name
+      key: name
+      type: string
+    mapping:
+      aeroway:
+      - aerodrome
+
   # etldoc: imposm3 -> osm_aeroway_linestring
   aeroway_linestring:
     type: linestring

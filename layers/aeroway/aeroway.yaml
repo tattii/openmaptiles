@@ -18,8 +18,9 @@ layer:
       - apron
   datasource:
     geometry_field: geometry
-    query: (SELECT geometry, class FROM layer_aeroway(!bbox!, z(!scale_denominator!))) AS t
+    query: (SELECT geometry, class, name FROM layer_aeroway(!bbox!, z(!scale_denominator!))) AS t
 schema:
+  - ./update_polygon.sql
   - ./layer.sql
 datasources:
   - type: imposm3
