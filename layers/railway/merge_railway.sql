@@ -7,7 +7,14 @@ DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen2 CASCADE;
 DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen3 CASCADE;
 
 
-update osm_railway_linestring2 SET name = regexp_replace(name, '\s*\(.*\)', '') WHERE name LIKE '%(%)';
+UPDATE osm_railway_linestring2 SET name = regexp_replace(name, '\s*\(.*\)', '') WHERE name LIKE '%(%)';
+
+
+-- narrow gauge railway
+-- ref https://ja.wikipedia.org/wiki/%E8%BB%BD%E4%BE%BF%E9%89%84%E9%81%93
+DELETE FROM osm_railway_linestring2 WHERE railway = 'narrow_gauge' 
+    AND name NOT IN ('三岐鉄道北勢線', '四日市あすなろう鉄道内部線', '四日市あすなろう鉄道八王子線', '黒部峡谷鉄道');
+
 
 CREATE INDEX IF NOT EXISTS osm_railway_linestring_geometry_idx ON osm_railway_linestring2 USING gist(geometry);
 

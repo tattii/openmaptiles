@@ -17,3 +17,9 @@ delete from osm_railway_station where osm_id = 3056436236;
 delete from osm_railway_linestring2 where name = 'ウイングシャトル';
 
 
+
+delete from osm_railway_station where osm_id = 298029072;
+delete from osm_railway_station where osm_id = 298027555;
+delete from osm_railway_station where osm_id = 298029113;
+delete from osm_railway_linestring2 where name = '子供汽車';
+
