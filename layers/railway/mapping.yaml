@@ -66,6 +66,7 @@ tables:
       - light_rail
       - monorail
       - tram
+      - narrow_gauge
 
   # etldoc: imposm3 -> osm_poi_point
   railway_station:
@@ -144,3 +145,56 @@ tables:
         building: ["no","none","No"]
     type: polygon
 
+  station_building_polygon:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: validated_geometry
+    - name: building
+      key: building
+      type: string
+    mapping:
+      building:part:
+      - train_station
+      building:
+      - train_station
+    filters:
+      ireject:
+        building:part: ["no","none","No"]
+        building: ["no","none","No"]
+    type: polygon
+
+  station_building_relation:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: validated_geometry
+    - name: area
+      type: area
+    - name: webmerc_area
+      type: webmerc_area
+    - name: building
+      key: building
+      type: string
+      from_member: true
+    - name: buildingpart
+      key: building:part
+      type: string
+      from_member: true
+    - name: member
+      type: member_id
+    - name: index
+      type: member_index
+    - name: role
+      type: member_role
+      from_member: true
+    - name: type
+      type: member_type
+    mapping:
+      building:part:
+      - train_station
+      building:
+      - train_station
+    type: relation_member
