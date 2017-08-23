@@ -1,4 +1,4 @@
-DROP TRIGGER IF EXISTS trigger_flag ON osm_airport_polygon;
+DROP TRIGGER IF EXISTS trigger_flag ON osm_aeroway_airport;
 DROP TRIGGER IF EXISTS trigger_refresh ON airport.updates;
 
 
