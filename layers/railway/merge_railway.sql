@@ -7,6 +7,8 @@ DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen2 CASCADE;
 DROP MATERIALIZED VIEW IF EXISTS osm_railway_network_gen3 CASCADE;
 
 
+update osm_railway_linestring2 SET name = regexp_replace(name, '\s*\(.*\)', '') WHERE name LIKE '%(%)';
+
 CREATE INDEX IF NOT EXISTS osm_railway_linestring_geometry_idx ON osm_railway_linestring2 USING gist(geometry);
 
 
