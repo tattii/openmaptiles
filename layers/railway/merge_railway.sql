@@ -54,7 +54,7 @@ CREATE MATERIALIZED VIEW osm_railway_network_gen2 AS (
     SELECT ST_Simplify(geometry, 40) AS geometry,
         osm_id, name, name_en, tags, railway, network, highspeed
     FROM osm_railway_network
-    WHERE railway = 'rail' AND ST_Length(geometry) > 4000
+    WHERE railway = 'rail'
 );
 CREATE INDEX IF NOT EXISTS osm_railway_network_gen2_geometry_idx ON osm_railway_network_gen2 USING gist(geometry);
 
@@ -64,7 +64,7 @@ CREATE MATERIALIZED VIEW osm_railway_network_gen3 AS (
     SELECT ST_Simplify(geometry, 80) AS geometry,
         osm_id, name, name_en, tags, railway, network, highspeed
     FROM osm_railway_network
-    WHERE railway = 'rail' AND highspeed = 'yes' AND ST_Length(geometry) > 8000
+    WHERE railway = 'rail' AND highspeed = 'yes'
 );
 CREATE INDEX IF NOT EXISTS osm_railway_network_gen3_geometry_idx ON osm_railway_network_gen3 USING gist(geometry);
 
