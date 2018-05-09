@@ -3,7 +3,11 @@ all: build/openmaptiles.tm2source/data.yml build/mapping.yaml build/tileset.sql
 
 update: clean all import-osm import-sql generate
 
+update-osm: clean all import-osm
+
 update-sql: clean all import-sql generate
+
+init-all: init update
 
 init:
 	docker-compose run --rm import-water
@@ -20,6 +24,9 @@ import-sql:
 generate:
 	rm ./data/tiles.mbtiles
 	docker-compose run --rm generate-vectortiles
+	add-metadata
+
+add-metadata:
 	docker-compose run --rm openmaptiles-tools  generate-metadata ./data/tiles.mbtiles
 	docker-compose run --rm openmaptiles-tools  chmod 666         ./data/tiles.mbtiles
 
@@ -67,6 +74,10 @@ build/mapping.yaml:
 
 build/tileset.sql:
 	mkdir -p build && generate-sql openmaptiles.yaml > build/tileset.sql
+
+update-mapping:
+	rm -f build/mapping.yaml
+	generate-imposm3 layers/${layer}/mapping.yaml > build/mapping.yaml
 
 clean:
 	rm -f build/openmaptiles.tm2source/data.yml && rm -f build/mapping.yaml && rm -f build/tileset.sql

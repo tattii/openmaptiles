@@ -109,8 +109,9 @@ services:
     env_file: .env
     environment:
       #BBOX: "8.25,46.97,9.58,47.52"
-      BBOX: "135.334786,34.610526,135.923727,35.089012" # kyoto, osaka
+      #BBOX: "135.334786,34.610526,135.923727,35.089012" # kyoto, osaka
       #BBOX: "133.57,32.83,138.32,36.31" # kansai
+      BBOX: "121.38,22.51,149.5,46.5" # japan
       #BBOX: ${BBOX}
       MIN_ZOOM: 1
       MAX_ZOOM: 14
