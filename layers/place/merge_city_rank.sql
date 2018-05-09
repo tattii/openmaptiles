@@ -1,6 +1,8 @@
 DROP TRIGGER IF EXISTS trigger_flag ON osm_city_point;
 DROP TRIGGER IF EXISTS trigger_refresh ON place_city.updates;
 
+update osm_city_point SET name = regexp_replace(name, '\s*\(.*\)', '') WHERE name LIKE '%(%)';
+
 CREATE EXTENSION IF NOT EXISTS unaccent;
 
 CREATE OR REPLACE FUNCTION update_osm_city_point() RETURNS VOID AS $$

@@ -1,6 +1,8 @@
 DROP TRIGGER IF EXISTS trigger_flag ON osm_island_polygon;
 DROP TRIGGER IF EXISTS trigger_refresh ON place_island.updates;
 
+
+
 -- etldoc:  osm_island_polygon ->  osm_island_polygon
 CREATE OR REPLACE FUNCTION convert_island_polygon_point() RETURNS VOID AS $$
 BEGIN
@@ -10,6 +12,11 @@ END;
 $$ LANGUAGE plpgsql;
 
 SELECT convert_island_polygon_point();
+
+DELETE from osm_island_point where name = '本州';
+DELETE from osm_island_point where name = '九州';
+DELETE from osm_island_point where name = '四国';
+DELETE from osm_island_point where name = '北海道';
 
 -- Handle updates
 
