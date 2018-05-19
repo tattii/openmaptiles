@@ -23,6 +23,9 @@ tables:
     - name: building
       key: building
       type: string
+    - name: amenity
+      key: amenity
+      type: string
     - name: buildingpart
       key: building:part
       type: string

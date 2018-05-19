@@ -1,25 +1,27 @@
 CREATE OR REPLACE FUNCTION poi_class_rank(class TEXT)
 RETURNS INT AS $$
     SELECT CASE class
-        WHEN 'hospital' THEN 20
-        WHEN 'park' THEN 25
-        WHEN 'cemetery' THEN 30
-        WHEN 'railway' THEN 40
-        WHEN 'bus' THEN 50
-        WHEN 'attraction' THEN 70
-        WHEN 'harbor' THEN 75
-        WHEN 'college' THEN 80
-        WHEN 'school' THEN 85
+        WHEN 'town_hall' THEN 20
+        WHEN 'library' THEN 30
+        WHEN 'museum' THEN 40
+        WHEN 'hospital' THEN 50
+        WHEN 'college' THEN 60
+        WHEN 'theme_park' THEN 70
+        WHEN 'attraction' THEN 80
         WHEN 'stadium' THEN 90
-        WHEN 'zoo' THEN 95
-        WHEN 'town_hall' THEN 100
-        WHEN 'campsite' THEN 110
-        WHEN 'cemetery' THEN 115
-        WHEN 'park' THEN 120
-        WHEN 'library' THEN 130
-        WHEN 'police' THEN 135
-        WHEN 'post' THEN 140
-        WHEN 'golf' THEN 150
+        WHEN 'school' THEN 100
+        WHEN 'park' THEN 110
+        WHEN 'zoo' THEN 120
+        WHEN 'park' THEN 130
+        WHEN 'cemetery' THEN 140
+        WHEN 'railway' THEN 150
+        WHEN 'bus' THEN 160
+        WHEN 'harbor' THEN 175
+        WHEN 'campsite' THEN 180
+        WHEN 'cemetery' THEN 185
+        WHEN 'police' THEN 180
+        WHEN 'post' THEN 180
+        WHEN 'golf' THEN 180
         WHEN 'shop' THEN 400
         WHEN 'grocery' THEN 500
         WHEN 'fast_food' THEN 600

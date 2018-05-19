@@ -1,3 +1,12 @@
+-- staion building polygon, relation
+CREATE OR REPLACE VIEW osm_station_all_buildings AS (
+    SELECT osm_id, geometry
+    FROM osm_station_building_polygon
+    UNION ALL
+
+    SELECT member AS osm_id, geometry
+    FROM osm_station_building_relation
+);
 
 CREATE OR REPLACE FUNCTION layer_railway(bbox geometry, zoom_level integer, pixel_width numeric)
 RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, tags hstore, class text, subclass text, network text) AS $$
@@ -51,13 +60,14 @@ RETURNS TABLE(osm_id bigint, geometry geometry, name text, name_en text, tags hs
     UNION ALL
 
     -- station building
-    SELECT osm_id, geometry, ''::text AS name,
+    SELECT osm_id, geometry,
+    ''::text AS name,
     ''::text AS name_en,
     ''::hstore AS tags,
     ''::text AS class,
     ''::text AS subclass,
     ''::text AS network
-    FROM osm_station_building_polygon
+    FROM osm_station_all_buildings
             WHERE geometry && bbox
                 AND zoom_level >= 14
     ;

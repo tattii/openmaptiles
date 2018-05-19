@@ -67,6 +67,44 @@ tables:
       - monorail
       - tram
       - narrow_gauge
+  
+  railway_relation:
+    type: relation_member
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: railway
+      name: railway
+      type: string
+      from_member: true
+    - key: name
+      name: name
+      type: string
+      from_member: true
+    - key: name
+      name: relname
+      type: string
+    - name: member
+      type: member_id
+    - name: index
+      type: member_index
+    - name: role
+      type: member_role
+    - name: type
+      type: member_type
+    relation_type:
+      - route
+    mapping:
+      route:
+        - train
+        - light_rail
+        - subway
+        - monorail
+        - tram
+        - narrow_gauge
+
 
   # etldoc: imposm3 -> osm_poi_point
   railway_station:
